@@ -20,58 +20,53 @@ async function getRecordsList() {
 async function getLabsRegistered() {
 	let labsCollection = await getLabsList();
 	let recordsCollection = await getRecordsList();
-
-	console.log(recordsCollection);
+	return getLabsListByScore(labsCollection, recordsCollection);
 }
 
 
 //基準点で分ける 90以上, 80以上, 70以上
 function getLabsListByScore(labs, records) {
 	let result = [];
-//	for(let lab of labs) {
-//		
-//	}
+
+	console.log(records);
+	
+	for(let lab of labs) {
+		let first = 0, second = 0, third = 0;
+		for(let record of records) {
+			console.log(record.first_lab != lab.lab_id);
+			if(record.first_lab != lab.lab_id && record.second_lab != lab.lab_id && record.third_lab != lab.lab_id) continue;
+			console.log(lab.lab_name + ", ave : " + record.ave);
+			if(record.average >= 90) {
+				first++;
+			} else if(record.average >= 80) {
+				second++;
+			}else if(record.average >= 70) {
+				third++;
+			}
+		}
+		let labObj = {
+			"lab": lab,
+			"first": first,
+			"second": second,
+			"third": third
+		};
+		result.push(labObj);
+	}
+	return result;
 }
 
 /* Get Method*/
 router.get('/', function(req, res, next) {
 	res.header('Content-Type', 'text/plain;charset=utf-8');
 	res.end('未実装');
-	getLabsRegistered();
+	getLabsRegistered().then((collections) => {
+		console.log(collections);
+		datas = {
+			data: collections
+		};
 
-/*
-	new records().query().select(function() {
-			this.count('*');
-		}).groupBy('first').then((firstCollections) => {
-			new records().select(function() {
-				this.count('*');
-			}).groupBy('second').then((secondCollections) => {
-				new records().select(function() {
-					this.count('*');
-				}).groupBy('third').then((thirdCollections) => {
-					new labs().fetchAll().then((labCollections) => {
-						console.log("first" + firstCollections.toArray().length);
-						console.log("second" + secondCollections.toArray().length);
-						console.log("third" + thirdCollections.toArray().length);
-						console.log("lab" + labCollections.toArray().length);
-					});
-				})
-			});
-		});
-	new labs().fetchAll().then((collection) => {
-		let labsModel = collection.toArray();
-		let labs = [];
-		for(labIndex in labs) {
-			
-		}
-                datas.labs = collection.toArray();
-                datas.title = '閲覧';
-                res.render('index', datas);
-        })
-        .catch((err) => {
-                res.status(500).json({ error: true, data: { message: err.message}});
-        });
-*/
+		res.render('readonly', datas);
+	});
 });
 
 
