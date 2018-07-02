@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p>近大　理工/情報　2018年度研究室配属用App</p>
+    <p>平均点と志望候補を入力すると自分の第一志望研究室に自己平均点以上が何人志望しているかがわかりまし。</p>
+    <p>皆が出来るだけ正確なデータを確認できるようにするため、確かな情報を入力してください</p>
+	<% if(err) { %> <ul class="error"> <%- err %> </ul>  <% } %> 
+	<% if (edit) { %>
+		<form action="/edit" method="POST">	
+			<input type="hidden" name="hash" value="<%= hash %>">
+	<% } else { %>
+		<form action="/" method="POST">
+	<% } %>
+		<ul>
+			<li>
+				<label for="first_lab">第一志望研究室</label>
+				<select name="first_lab" value="<%= form.first %>">
+					<% for(labIndex in labs) {%>
+						<% var lab = labs[labIndex].attributes; %>
+							<option value="<%= lab.lab_id %>"  <% if(form.first == labIndex) { %> selected <% } %>>
+								<%= lab.lab_name %>
+							</option>
+					<% } %>
+				</select>
+			</li>
+			<li>
+				<label for="second_lab">第二志望研究室</label>
+				<select name="second_lab" value="<%= form.second %>" >
+		                        <% for(labIndex in labs) {%>
+		                                <% var lab = labs[labIndex].attributes; %>
+		                                        <option value="<%= lab.lab_id %>"  <% if(form.second == labIndex) { %> selected <% } %>>
+		                                                <%= lab.lab_name %>
+		                                        </option>
+		                        <% } %>
+		                </select>
+			</li>
+			<li>
+				<label for="third_lab">第三志望研究室</label>
+				<select name="third_lab" value="<%= form.third %>" >
+		                        <% for(labIndex in labs) {%>
+		                                <% var lab = labs[labIndex].attributes; %>
+		                                        <option value="<%= lab.lab_id %>"  <% if(form.third == labIndex) { %> selected <% } %>>
+		                                                <%= lab.lab_name %>
+		                                        </option>
+		                        <% } %>
+		                </select>	
+			</li>
+			<li>
+				<label for="average">全科目平均点</label>
+				<input id="average" name="average" type="text" value="<%= form.ave %>">
+			</li>
+			<li>
+				<input type="submit" value="Send">
+			</li>
+		</ul>
+	</form>
+	<br>
+	<form action="/read" method="GET"> 
+		<input type="submit" value="見るだけ">
+	</form>
+  </body>
+</html>
