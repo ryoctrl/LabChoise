@@ -67,6 +67,19 @@ router.get('/edit', function(req, res, next) {
 	}
 });
 
+router.get('/delete', function(req, res, next) {
+	let cookie = getCookie("hash_id", req);
+	knex('records').where('cookie', cookie).del().then(() => {
+		let datas = {
+			err: ["削除しました"],
+			form: {first: 0, second: 0, third: 0, ave:""},
+			hash: null,
+			edit: false	
+		}
+		renderChoisepage(req, res, datas);
+	});
+});
+
 router.post('/edit', function(req, res, next) {
 	let cookie = req.body.hash;
 	let ave = req.body.average;
