@@ -26,16 +26,20 @@ async function getLabsRegistered() {
 
 //基準点で分ける 90以上, 80以上, 70以上
 function getLabsListByScore(labs, records) {
-	let result = [];
+	let result = [{
+		"lab": {lab_id: -1, lab_name: "研究室"},
+		"first": "90点以上",
+		"second": "80点以上",
+		"third": "70点以上",
+		"num": records.length
+	}];
 
 	console.log(records);
 	
 	for(let lab of labs) {
 		let first = 0, second = 0, third = 0;
 		for(let record of records) {
-			console.log(record.first_lab != lab.lab_id);
 			if(record.first_lab != lab.lab_id && record.second_lab != lab.lab_id && record.third_lab != lab.lab_id) continue;
-			console.log(lab.lab_name + ", ave : " + record.ave);
 			if(record.average >= 90) {
 				first++;
 			} else if(record.average >= 80) {
@@ -57,12 +61,12 @@ function getLabsListByScore(labs, records) {
 
 /* Get Method*/
 router.get('/', function(req, res, next) {
-	res.header('Content-Type', 'text/plain;charset=utf-8');
-	res.end('未実装');
+//	res.header('Content-Type', 'text/plain;charset=utf-8');
+//	res.end('未実装');
 	getLabsRegistered().then((collections) => {
 		console.log(collections);
 		datas = {
-			data: collections
+			data: collections,
 		};
 
 		res.render('readonly', datas);
