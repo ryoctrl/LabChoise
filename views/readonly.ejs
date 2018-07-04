@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LabChoise</title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+	</head>
+	<body>
+	<form action="/" method="GET">
+		<input type="submit" value="戻る">
+	</form>
+	現在の総データ数: <%= data[0].num %>
+		<ul>
+ 			<% for(dataIndex in data) { %>
+				<li class="<% if(dataIndex == 0){%>top<%}else{%>next<%}%>">
+					<span class="dan"> <%= data[dataIndex].lab.lab_name %></span>
+					
+					<span class="dan2<%  if(dataIndex != 0) {%>-r<% }%>"> <%= data[dataIndex].first %> </span>
+					<span class="dan2<%  if(dataIndex != 0) {%>-r<% }%>"> <%= data[dataIndex].second %> </span>
+					<span class="dan2<%  if(dataIndex != 0) {%>-r<% }%>"> <%= data[dataIndex].third %> </span>
+				</li>
+			<% } %>
+		</ul>
+	</body>
+</html>

@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<title>LabChoise</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
 	<p> <%= lab %> の上位希望者人数 <%= count %> </p>
 	<form action="/edit" method="GET">
 		<input type="submit" value="Edit">
+	</form>
+	<form action="/delete" method="GET">
+		<input type="submit" value="Delete">
+	</form>
+	<form action="/readonly" method="GET">
+		<input type="submit" value="全データを見る">
 	</form>
   </body>
 </html>
