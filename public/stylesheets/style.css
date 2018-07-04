@@ -15,6 +15,41 @@ li {
 	margin-top: 10px;
 }
 
+
 ul {
-	list-style: none;
-}
+ list-style:none;
+ }
+
+li.top {
+ width: 47vw;
+ border: 1px solid #ccc;
+ background-color: #eee8aa;
+ }
+
+li.next {
+ width: 47vw;
+ border-left: 1px solid #ccc;
+ border-right: 1px solid #ccc;
+ border-bottom: 1px solid #ccc;
+ background-color: #f5f5dc;
+ }
+
+span.dan {
+ width: 10vw;
+ float: left;
+ padding: 10px;
+ }
+
+span.dan2 {
+ width: 10vw;
+ display: inline-block;
+ padding: 10px;
+ border-left: 1px solid #ccc;
+ }
+span.dan2-r {
+ width: 10vw;
+ display: inline-block;
+ padding: 10px;
+ border-left: 1px solid #ccc;
+ background-color: #fffff0;
+ }
