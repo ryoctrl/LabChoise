@@ -53,9 +53,6 @@ class LabsList extends React.Component {
 	}
 }
 
-ReactDOM.reander(
-
-);
 
 ReactDOM.render(
 	<LabsList url="https://str.mosin.jp/_api/labs_status" />,
