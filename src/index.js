@@ -31,8 +31,9 @@ class LabsList extends React.Component {
 
 	render() {
 		const labs_list = this.state.labs.map((lab) => {
-			let className = lab.lab.lab_id == -1 ? "top" : "next";
-			let danName = lab.lab.lab_id == -1 ? "dan2" : "dan2-r";
+			if(lab.num > 0) this.numOfData = lab.num;
+			let className = lab.lab.lab_id === -1 ? "top" : "next";
+			let danName = lab.lab.lab_id === -1 ? "dan2" : "dan2-r";
 			console.log("rendering");
 			return (
 				<li class={className}>
@@ -45,6 +46,10 @@ class LabsList extends React.Component {
 		});
 		return (
 			<div>
+				<form action="https://labchoise.mosin.jp/" method="GET">
+					<input type="submit" value="戻る"></input>
+				</form>
+				<p>現在のデータ数:{this.numOfData}</p>
 				<ul>
 					{labs_list}
 				</ul>
