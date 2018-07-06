@@ -1,6 +1,6 @@
 # Labchoise Setting YAML.
 
-name: labchoise
+name: labchoise.react
 script: ./bin/www
 exec_cluster: "cluster"
 instances: 0
