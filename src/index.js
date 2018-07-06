@@ -30,17 +30,16 @@ class LabsList extends React.Component {
 	}
 
 	render() {
-		const labs_list = this.state.labs.map((lab) => {
+		const labs_list = this.state.labs.map((lab, i) => {
 			if(lab.num > 0) this.numOfData = lab.num;
 			let className = lab.lab.lab_id === -1 ? "top" : "next";
 			let danName = lab.lab.lab_id === -1 ? "dan2" : "dan2-r";
-			console.log("rendering");
 			return (
-				<li class={className}>
-					<span class="dan"> {lab.lab.lab_name}</span>
-					<span class={danName}> {lab.first} </span>
-					<span class={danName}> {lab.second} </span>
-					<span class={danName}> {lab.third} </span>
+				<li key={i} className={className}>
+					<span className="dan"> {lab.lab.lab_name}</span>
+					<span className={danName}> {lab.first} </span>
+					<span className={danName}> {lab.second} </span>
+					<span className={danName}> {lab.third} </span>
 				</li>
 			)
 		});
