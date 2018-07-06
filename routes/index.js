@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 let crypto = require('crypto');
@@ -20,8 +21,15 @@ let labs = Bookshelf.Model.extend({
 	tableName: 'labs'
 });
 
+
 /* GET home page. */
+router.get('/labs', function(req, res, next) {
+	console.log("index labs");
+});
+
+/*
 router.get('/', function(req, res, next) {
+	console.log("access to index");
 	let cookie = getCookie("hash_id", req);
 	let datas = {
 		err: null,
@@ -143,6 +151,7 @@ router.post('/edit', function(req, res, next) {
 			return;
 		});
 });
+*/
 
 function renderChoisepage(req, res, datas) {
 	new labs().fetchAll().then((collection) => {
